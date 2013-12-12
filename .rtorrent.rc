@@ -1,0 +1,62 @@
+# rtorrent.rc
+# kure's custom modifications
+# NOTE: how do i set variables in here? apparently setting the bash way
+#       didnt work. rtorrent interprets $var as a command (tries to run 'var')
+
+# Where to save Downloaded files
+directory=/home/kure/Torrents
+
+# Where to store session files, to resume downloads and such
+# (just by setting a session dir, torrent state and data is saved
+#  between program executions)
+session=/home/kure/Torrents/.rtorrent-sessions
+
+# Automatically move .torrent file to this directory
+#torrent-files-directory=/home/kure/Torrents/.torrents
+# uncommenting this causes startup error
+
+# First, we need the basename of the .torrent file
+system.method.insert = d.get_loaded_basename, string|simple, "execute_capture=bash, -c, \"echo -n \$(basename \
+\\\"$1\\\")\", cleanbase, $d.get_loaded_file="
+
+# Concatenating the destination directory with the basename
+system.method.insert = d.get_meta_path, simple, "cat=/home/kure/Torrents/.rtorrent-torrents/, $.d_get_loaded_basename="
+
+# Finally, move the .torrent file and update the tied_to_file reference to the path
+system.method.set_key = event.download.inserted_new, move_loaded, "execute=mv, -u, $d.get_loaded_file=, \
+$d.get_meta_path=; d.set_tied_to_file=$d.get_meta_path="
+
+# Allow encryption
+encryption = allow_incoming, try_outgoing, enable_retry
+
+# Enables DHT support (NOTE: look for DHT on Wikipedia or something)
+dht = auto
+dht_port = 6881
+peer_exchange = yes
+
+# Stop downloads when disk space gets low
+schedule = low_diskspace, 5, 60, close_low_diskspace=3000M
+
+# # UI/VIEW: Colors
+# ui.color.alarm.set="bold red on black"
+# ui.color.complete.set="bright green"
+# ui.color.even.set=""
+# ui.color.focus.set="yellow"
+# ui.color.footer.set="bold cyan on black"
+# ui.color.incomplete.set="white"
+# ui.color.info.set="bold blue"
+# ui.color.label.set="gray"
+# ui.color.leeching.set="bold bright yellow"
+# ui.color.odd.set=""
+# ui.color.progress0.set="green"
+# ui.color.progress20.set="green"
+# ui.color.progress40.set="green"
+# ui.color.progress60.set="green"
+# ui.color.progress80.set="green"
+# ui.color.progress100.set="bold bright green"
+# ui.color.progress120.set="bold bright green"
+# ui.color.queued.set="magenta"
+# ui.color.seeding.set="bold bright yellow"
+# ui.color.stopped.set="blue"
+# ui.color.title.set="blue on black"
+

@@ -1,0 +1,33 @@
+# My custom .inputrc - Config for libreadline
+# See readline(3readline) and `info rluserman' for more information.
+
+# Do not fucking blink on tab-completion, that's awful
+set bell-style none
+
+# Those things will only work on emacs mode
+# (just in case I ever go to vi mode)
+$if mode=emacs
+
+"\e[1;5C": forward-word
+"\e[1;5D": backward-word
+"\e[5C":   forward-word
+"\e[5D":   backward-word
+"\e\e[C":  forward-word
+"\e\e[D":  backward-word
+
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+
+# Bash custom keybindings - HUGE productivity boost!
+# Instead of typing those commands I can make those
+# key.
+
+"\C-x\C-l": "ls\n"          # Bind C-x C-l to `ls`
+"\C-x\C-w": "wicd-curses\n" # Bind C-x C-w to `wicd-curses`, I use it a lot...
+"\C-x\C-m": "make\n"        # Bind C-x C-m to `make`
+"\C-x\C-r": "make run\n"    # Bind C-x C-m to `make run`
+
+# Another command I use a lot
+"\C-x\C-a": "sudo apt-get update && sudo apt-get upgrade\n" 
+
+$endif

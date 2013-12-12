@@ -1,0 +1,31 @@
+#!/bin/bash
+#
+# Submenu for my main CDM config file `~/.cdmrc`.
+# It shows Power Options.
+
+binlist=(
+  '/usr/bin/systemctl/reboot'
+  '/usr/bin/systemctl/poweroff'
+  '/usr/bin/systemctl/hibernate'
+  '/usr/bin/cdm ~/.cdmrc'
+)
+
+namelist=(
+  'Power Off'
+  'Reboot'
+  'Hibernate'
+  'Back to Main Menu'
+)
+
+flaglist=(C C C C)
+
+# Default arguments, copied from main config file.
+dialogrc="blackandwhite"
+countfrom=0
+display=0
+xtty=7
+locktty=no
+consolekit=yes
+cktimeout=30
+serverargs=(-nolisten tcp)
+altstartx=no

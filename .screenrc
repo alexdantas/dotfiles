@@ -1,0 +1,179 @@
+################################################################################
+# kure's custom .screenrc
+# Extensively based on the original .screenrc, by Brad Sims 25/06/2004
+# (Modified for Trisquel by Ruben Rodriguez and Santiago Rodriguez)
+
+# Brad got tired of .screenrc's on the internet being so
+# poorly commented... So being a good GNUbie, he took matters
+# into his own hands; and wrote this dotfile.
+
+# Hardstatus line ##############################################################
+
+# This line stays forever at the bottom. So there'll be some
+# useful information, like the current time, battery and etc
+
+# Ignore the ' marks if you use these examples for yourself
+
+# Note that if you want to use the color brown under konsole
+# You actually use bright yellow (%{Y}).
+
+# Note the embeded space after the colon, I feel
+#  it just looks nicer with a blank between the
+#  text and console edge:
+#   '%{=b}%{G} Screen(s): '
+
+# This prints the window listing in blue:
+#   '%{b}%w'
+
+# This right-aligns what follows:
+#   '%='
+
+# This displays the time (hours and minutes) in 12hr format
+# and adds an AM/PM flag, in bold green:
+#   '%{G}%C%A'
+
+# This displays the day of the week:
+#   '%D'
+
+#This displays the date in Mon/day/year format:
+# and again I embeded a space to give me one space
+# between the text and console edge:
+#  '%M/%d/%Y '
+
+# The resulting command give you a status line that
+#  looks like this:
+#   | Screen(s): 0* bash           5:30PM  Fri, Jun/25/2004 |
+#  (The pipes indicate the edges of the xterm/console).
+
+# This is an extension by kure to display battery level
+# backtick defines a program that will be run
+#  1 is the program code
+#  5 is the refresh rate
+#  5 is something i havent figured out yet. All i know is that it refreshes each 5 seconds
+backtick 1 5 5 /home/kure/bin/battery.sh
+
+# Bellow are the contents of 'battery.sh'
+#!/bin/bash
+# battery.sh: Prints battery information
+# Currently prints battery percentage, time remaining
+# and status (charging/discharging).
+#
+# Examples: 12% (01:23:30) C
+#           31% (00:30:01) D
+#
+#acpi | awk '{
+#                printf("%s (%s) %c\n", $4, $5, $3)
+#            }' | tr -d ','
+#
+#exit 0
+
+# Green text, time, and date; windows in blue:
+hardstatus alwayslastline
+#hardstatus string "%{=b}%{kW} [%{k}%?%-Lw%?%{W}%n %f%t%?(%u)%?%{k}%?%+Lw%?%?] %=%{c}%1` %{w}%c %{G}%D,%d-%m-%Y "
+#                    defaultBg
+#                                           activeColor
+#                                                              inactive
+#                                             activeNumber
+# %f = ' $'
+#                                                                        align right
+hardstatus string "%{=b} %{k}%?%-w%?%{ky}%n %t%?%{k}%+w%=%{g}%1` %{w}%c %{y}%D,%d-%m-%Y "
+#hardstatus string "%{=b} %?%{d}%-w%?%{W}%n %t%? {%u} %?%{r}%?%{k}%+Lw%?%="
+
+# blue theme
+#hardstatus string "%{kb} [%{k}%?%-Lw%?%{w}%n %f%t%?(%u)%?%{k}%?%+Lw%?%?] %=%{kb}%1` %{k}%c %{k}%D,%d/%m/%Y "
+
+# This was my previous hardstatus
+#hardstatus string "%{=b}%{G} [%{G}%w] %=%{kc}%1` %{y}%c %{kG}%D,%d/%m/%Y "
+
+# Some general options #########################################################
+
+# The default shell title
+# my prompt looks like this 'kure@~ $'
+# so screen will look for the thing after '$ '
+# '|bash' turns the default title to bash
+#shelltitle '$ |bash'
+#shelltitle 'tab'
+shelltitle ''
+
+# Enable scroll back
+termcapinfo xterm|xterms|xs|rxvt ti@:te@
+
+# Turn off start message:
+startup_message off
+
+# Set messages timeout to three seconds:
+msgwait 3
+
+# What?
+#msgminwait 0
+
+# Enlarge buffer (warning: screen keeps it all in RAM)
+defscrollback 10000
+
+#Disable beep
+vbell off
+bell " %n %t !"
+
+# Nethack style messages
+nethack off
+
+caption splitonly "%2n %t"
+
+# Keybindings ##################################################################
+
+# When you use 'stuff', screen recognizes everything after it as the user
+# had typed them.
+# When using 'bind', it replaces a key with a command, when the user already
+# typed 'C-a'.
+
+# 'bindkey -m' Changes the copy table only -- in copy mode
+
+# The bindings below used the funcion keys, but I
+# prefer to leave them free. 'mc' uses them, so
+# it becomes a mess
+
+# bind F7  to detach screen session from this terminal
+# bind F8  to kill current screen window.
+# bind F9  to create a new screen
+# bind F10 to rename current screen window
+# bind F11 to move to previous window
+# bind F12 to move to next window
+#bindkey -k k1 select 0
+#bindkey -k k2 select 1
+#bindkey -k k3 select 2
+#bindkey -k k4 select 3
+#bindkey -k k5 select 4
+#bindkey -k k6 select 5
+#bindkey -k k7 copy
+#bindkey -k k8 paste .
+#bindkey -k k9 screen
+#bindkey -k k8 kill
+#bindkey -k k9 screen
+#bindkey -k k; title
+#bindkey -k F1 prev
+#bindkey -k F2 next
+#unbind s
+#bind s
+
+#  Toggle 'fullscreen' widh 'C-a f' and 'C-a F' (hides hardstatus bar)
+bind f eval "hardstatus ignore"
+bind F eval "hardstatus alwayslastline"
+
+# Trying my best to mimic emacs' keybinding style
+
+bindkey -m "^[v" stuff ^b  # M-v scrollbacks one page
+bindkey -m "^v"  stuff ^f  # C-v scrolls one page
+bindkey -m "^a"  stuff 0   # C-a goes to the beginning of the current line
+bindkey -m "^e"  stuff $   # C-e goes to the end of the current line
+bindkey -m "^[f" stuff w   # M-f moves one word
+bindkey -m "^[b" stuff b   # M-b moves one word back
+bindkey -m "^[<" stuff g   # M-< goes to the beginning of the buffer
+bindkey -m "^[<" stuff G   # M-> goes to the end of the buffer
+bindkey -m "^@"  stuff ' ' # C-space marks the copy buffer
+bindkey -m "^f"  stuff l   # C-f moves forward a char
+bindkey -m "^b"  stuff h   # C-b moves backward a char
+bindkey -m "^r"  stuff ?   # C-r searches backward
+bindkey -m "^s"  stuff /   # C-s searches forward
+
+# End-of-file
+

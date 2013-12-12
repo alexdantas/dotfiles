@@ -1,0 +1,98 @@
+!!! These are default settings for a lot of applications
+
+!! `Emacs` (graphical)
+Emacs.default.attributeFont:  -*-*-medium-r-*-*-*-120-*-*-m-*-*-*
+Emacs*menubar*font:           fixed
+Emacs.modeline.attributeFont: fixed
+
+!! `urxvt`, a nice unicode terminal
+
+!! All extensions
+! URL, Fullscreen, Tabbed
+URxvt.perl-ext-common: default,matcher,fullscreen,tabbed
+
+! Full-screen keybinding
+URxvt.keysym.F11: perl:fullscreen:switch
+
+! For urxvt to match gnome-terminal "Linux console" scheme
+! foreground/background
+URxvt*background: #000000
+URxvt*foreground: #ffffff
+! black
+URxvt.color0  : #000000
+URxvt.color8  : #555555
+! red
+URxvt.color1  : #AA0000
+URxvt.color9  : #FF5555
+! green
+URxvt.color2  : #00AA00
+URxvt.color10 : #55FF55
+! yellow
+URxvt.color3  : #AA5500
+URxvt.color11 : #FFFF55
+! blue
+URxvt.color4  : #0000AA
+URxvt.color12 : #5555FF
+! magenta
+URxvt.color5  : #AA00AA
+URxvt.color13 : #FF55FF
+! cyan
+URxvt.color6  : #00AAAA
+URxvt.color14 : #55FFFF
+! white
+URxvt.color7  : #AAAAAA
+URxvt.color15 : #FFFFFF
+
+! The default font
+URxvt*font: xft:Monospace:pixelsize=11:antialias=true
+
+! Don't use a bold font
+URxvt*boldFont: xft:Monospace:bold:pixelsize=11:antialias=true
+
+!! URLS
+
+! Opening URLs on Firefox
+URxvt.urlLauncher     : firefox
+URxvt.matcher.button  : 1
+
+! URL colors
+URxvt.colorUL: #4682B4
+
+! Opening links from the keyboard
+URxvt.keysym.C-Delete:  perl:matcher:last
+URxvt.keysym.M-Delete:  perl:matcher:list
+
+! Disable scroll bar
+URxvt.scrollBar: false
+
+! Saving lines
+URxvt.saveLines: 12000
+
+! do not scroll with output
+URxvt*scrollTtyOutput: false
+
+! scroll in relation to buffer (with mouse scroll or Shift+Page Up)
+URxvt*scrollWithBuffer: true
+
+! scroll back to the bottom on keypress
+URxvt*scrollTtyKeypress: true
+
+! The icon on the taskbar
+URxvt.iconFile: /usr/share/icons/Faenza/apps/scalable/xterm_32x32.svg
+
+!! TABS
+! Shortcuts:
+! Shift ↓   new tab
+! Shift ←   go to left tab
+! Shift →   go to right tab
+! Ctrl  ←   move tab to the left
+! Ctrl  →   move tab to the right
+! Ctrl  D   close tab
+
+! Tabs colors
+URxvt.tabbed.tabbar-fg: 2
+URxvt.tabbed.tabbar-bg: 0
+URxvt.tabbed.tab-fg:    3
+URxvt.tabbed.tab-bg:    0
+
+
