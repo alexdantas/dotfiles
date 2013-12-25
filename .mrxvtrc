@@ -147,8 +147,8 @@ Mrxvt.cursorBlink:   true
 #Mrxvt.background:    #1C1C1C
 
 # SURPRISE muthafucka
-# green
-Mrxvt.background:    #002000
+# blue
+Mrxvt.background:    #000020
 
 # white foreground
 #Mrxvt.foreground:   #ffffff
@@ -285,8 +285,8 @@ Mrxvt.highlightColor:      #303060
 #same as awesome
 #Mrxvt.tabBackground:    #1C1C1C
 
-# SURPRISE green
-Mrxvt.tabBackground:    #002000
+# SURPRISE blue
+Mrxvt.tabBackground:    #000020
 
 #Mrxvt.tabForeground:         #909090
 # sweet white-foreground
@@ -307,8 +307,8 @@ Mrxvt.tabForeground:    #e4e4e4
 # same as awesome
 #Mrxvt.itabBackground:    #1C1C1C
 
-# SURPRISE
-Mrxvt.itabBackground:    #002000
+# SURPRISE blue
+Mrxvt.itabBackground:    #000020
 
 # Scroll bar colors
 Mrxvt.scrollColor:        #808080
