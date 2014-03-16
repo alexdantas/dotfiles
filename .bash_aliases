@@ -366,11 +366,9 @@ alias uzbl="uzbl-tabbed"
 function isa() { cat ~/freebsd; }
 
 # Locks screen with `xscreensaver`.
-# It normally isn't started up automatically with my distro,
-# so this is a chance to both initialize it and lock the
-# screen.
+# On Awesome we guarantee it's always started.
+# If you're using other Window Manager, do the same.
 function lock() {
-	xscreensaver -no-splash &>/dev/null &
 	xscreensaver-command -lock
 }
 
@@ -382,3 +380,6 @@ alias rdate="ruby -r 'date' -e 'puts Date.today.strftime %q{%b %d, %Y}'"
 
 # Showing previous/current/next month
 alias cal="cal -3"
+
+# Why does fbreader goes against every other program on earth
+alias fbreader=FBReader

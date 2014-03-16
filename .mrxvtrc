@@ -4,7 +4,7 @@
 # WINDOW OPTIONS
 
 # Start maximized
-Mrxvt.maximized: True
+Mrxvt.maximized: False
 
 ################################################################################
 # TAB-BAR OPTIONS
@@ -167,7 +167,6 @@ Mrxvt.foreground:    #e4e4e4
 # Sweet dark-blue black
 #Mrxvt.color0:        #01050D
 #Mrxvt.color0:        #404040
-;5A
 Mrxvt.color0:        #303030
 
 # red
@@ -339,7 +338,7 @@ Mrxvt.internalBorder:   0
 #Mrxvt.termName:        xterm
 
 # Default title of each tab (empty).
-Mrxvt.tabTitle:            
+Mrxvt.tabTitle:
 
 # Make double click select whole URL's
 Mrxvt.cutChars:            :=/~#@?%&_-.0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0abcdefghijklmnopqrstuvwxyz

@@ -34,9 +34,51 @@ HISTCONTROL=ignoredups:ignorespace
 export HISTSIZE=
 export HISTFILESIZE=
 
-# This will force refreshing the history file
-# after every command
-export PROMPT_COMMAND='history -a'
+# Advanced History Management!
+#
+# Sometimes my ~/.bash_history file was deleted and I couldn't
+# figure out why.
+# Searching led me to this page https://bbs.archlinux.org/viewtopic.php?id=150992
+# which tells it's a Bash problem, occurring when multiple
+# shells die at the same time (like resetting computer or
+# suddenly killing X).
+#
+# So I'll handle myself the history, along with Bash's .bash_history.
+# I don't care when it's resetted because my file won't.
+HISTORY_FILE="$HOME/.BASH_HISTORY"
+
+# This function will be executed right before any command inserted.
+prompt_command() {
+	# Setting the title of the terminal as the current directory
+	echo -ne "\033]0;${PWD}\a"
+
+	# Checking if the .bash_history file was cleared.
+	# If so, restoring to the backup
+	touch ~/.bash_history ~/.bash_history.bkp
+
+	new_count=`wc -l ~/.bash_history     | cut -d ' ' -f 1`
+	bkp_count=`wc -l ~/.bash_history.bkp | cut -d ' ' -f 1`
+
+	if (( $bkp_count > $new_count ))
+	then
+		# Woops, the .bash_history was cleared somehow!
+		cat ~/.bash_history.bkp ~/.bash_history > ~/.bash_history
+	fi
+
+	# Saving backup
+	cp ~/.bash_history ~/.bash_history.bkp
+
+	# Appending to the old .bash_history
+	history -a
+
+	# My new format to append to my new file
+	# DATE, TIME, SHELL PID, HISTORY COMMAND COUNT, COMMAND
+	history | tail -n 1 | xargs -0 echo -n `date +'%y-%m-%d %R:%S'` $$ >> "$HISTORY_FILE"
+}
+
+# This will force the previous function to be executed
+# after every command I do
+export PROMPT_COMMAND=prompt_command
 
 # Disable Ctrl+S and Ctrl+Q terminal flow input
 # (now Ctrl+s does forward incremental search on history)
@@ -52,12 +94,12 @@ fi
 case "$TERM" in
 	xterm-color)    color_prompt=yes;;
 	xterm-256color) color_prompt=yes;;
-	rxvt)           export LC_CTYPE=en_US.iso-8859-1; export LANG=en_US.iso-8859-1;;
+#	rxvt)           export LC_CTYPE=en_US.iso-8859-1; export LANG=en_US.iso-8859-1;;
 esac
 
 # This pretty much cancels the thing right above, right?
 # I use this to allow pretty colored output on certain programs.
-export TERM=xterm-256color
+#export TERM=xterm-256color
 
 # Forcing color prompt on everything.
 force_color_prompt=yes
@@ -84,9 +126,8 @@ fi
 # My custom ls colors are on "~/.dircolors"
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
+
+    alias ls='ls --color=auto --time-style=long-iso'
 
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
@@ -119,12 +160,12 @@ export MAIN_HOME=~
 ## Paths
 
 # PATH: To executable files
+export PATH=$PATH:/usr/games             # Strangely it doesnt appear on Arch
 export PATH=$PATH:$MAIN_HOME/bin         # kure's custom bin dir
-export PATH=$PATH:$MAIN_HOME/sbt/bin     # temporary stuff for SCALA class
-export PATH=$PATH:/opt/java/jre/bin      # Arch Linux: where I keep the jre
 export PATH=$PATH:/usr/bin/core_perl     # Arch Linux: core perl modules
+export PATH=$PATH:~/.gem/ruby/2.1.0/bin  # Ruby gems (newest new new Ruby)
 export PATH=$PATH:~/.gem/ruby/2.0.0/bin  # Ruby gems
-export PATH=$PATH:~/.rvm/ruby/2.0.0/bin  # Ruby gems
+export PATH=$PATH:/opt/jruby/bin         # Jruby Binaries
 
 # Reset PATH
 # PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/games
@@ -179,16 +220,11 @@ export LYNX_LSS=~/.lynx/lynx.lss
 # check them out!
 export INPUTRC=$MAIN_HOME/.inputrc
 
-# Are we on a X session?
-if [ -e "$XAUTHORITY" ]
-then
-	# On `.bash_profile` I DISABLE Caps Lock
-
-	# Making Caps Lock act as a Super Key (Windows logo key)
-	# If you wanna use extra keys, see `.xmodmap`.
-	setxkbmap -option
-	setxkbmap -option caps:super
-fi
+# # Are we on a X session?
+# if [ -e "$XAUTHORITY" ]
+# then
+# 	# Do something naughty
+# fi
 
 # Debian Packager-related stuff
 # Ignore it if you're not on it.
@@ -211,4 +247,5 @@ unset GEM_HOME
 # Avoid re-reading this file unless explicitly asked
 # (by the alias `resource`)
 fi
+
 

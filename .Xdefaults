@@ -1,71 +1,81 @@
-!!! These are default settings for a lot of applications
+!! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !!
+!! My Xresources file!
+!!
+!! These are default settings for a lot of applications
+!! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !!
 
-!! `Emacs` (graphical)
+! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! !
+! `Emacs` (graphical)
+! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! !
+
 Emacs.default.attributeFont:  -*-*-medium-r-*-*-*-120-*-*-m-*-*-*
 Emacs*menubar*font:           fixed
 Emacs.modeline.attributeFont: fixed
 
-!! `urxvt`, a nice unicode terminal
+! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! !
+! urxvt
+!
+! Settings for this awesome terminal emulator
+! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! !
 
-!! All extensions
-! URL, Fullscreen, Tabbed
-URxvt.perl-ext-common: default,matcher,fullscreen,tabbed
+!! Color scheme
+!! Mix of several found over the time
+URxvt*background: #000020
+URxvt*foreground: #E4E4E4
 
-! Full-screen keybinding
-URxvt.keysym.F11: perl:fullscreen:switch
-
-! For urxvt to match gnome-terminal "Linux console" scheme
-! foreground/background
-URxvt*background: #000000
-URxvt*foreground: #ffffff
 ! black
 URxvt.color0  : #000000
 URxvt.color8  : #555555
 ! red
-URxvt.color1  : #AA0000
-URxvt.color9  : #FF5555
+URxvt.color1  : #d70000
+URxvt.color9  : #d75555
 ! green
-URxvt.color2  : #00AA00
-URxvt.color10 : #55FF55
+URxvt.color2  : #5f8700
+URxvt.color10 : #00d700
 ! yellow
-URxvt.color3  : #AA5500
-URxvt.color11 : #FFFF55
+URxvt.color3  : #af8700
+URxvt.color11 : #d7d700
 ! blue
-URxvt.color4  : #0000AA
-URxvt.color12 : #5555FF
+URxvt.color4  : #0087ff
+URxvt.color12 : #3305FA
 ! magenta
-URxvt.color5  : #AA00AA
-URxvt.color13 : #FF55FF
+URxvt.color5  : #af005f
+URxvt.color13 : #D700FF
 ! cyan
-URxvt.color6  : #00AAAA
-URxvt.color14 : #55FFFF
+URxvt.color6  : #00afaf
+URxvt.color14 : #00AFFF
 ! white
 URxvt.color7  : #AAAAAA
 URxvt.color15 : #FFFFFF
 
-! The default font
-URxvt*font: xft:Monospace:pixelsize=11:antialias=true
+!! Colors of the tab bar
+URxvt.tabbed.tabbar-fg: 7
+URxvt.tabbed.tabbar-bg: -1
+URxvt.tabbed.tab-fg:    6
+URxvt.tabbed.tab-bg:    -1
 
-! Don't use a bold font
+! This makes urxvt transparent
+URxvt*.transparent: false
+
+! URxvt*.shading: 0 to 99 darkens, 101 to 200 lightens
+!URxvt*.shading: 100
+
+! The default font
+!URxvt*font: xft:Monospace:pixelsize=10:antialias=true
+URxvt*font: xft:Bitstream Vera Sans Mono:pixelsize=11:antialias=true
+
+! Dont use a bold font
 URxvt*boldFont: xft:Monospace:bold:pixelsize=11:antialias=true
 
-!! URLS
+! The icon on the taskbar
+URxvt.iconFile: /usr/share/icons/Faenza/apps/scalable/xterm_32x32.svg
 
-! Opening URLs on Firefox
-URxvt.urlLauncher     : firefox
-URxvt.matcher.button  : 1
+! Disabling Ctrl+Shift shortcut
+URxvt.iso14755:    false
+URxvt.iso14755_52: false
 
-! URL colors
-URxvt.colorUL: #4682B4
-
-! Opening links from the keyboard
-URxvt.keysym.C-Delete:  perl:matcher:last
-URxvt.keysym.M-Delete:  perl:matcher:list
-
-! Disable scroll bar
+!! Misc settings
 URxvt.scrollBar: false
-
-! Saving lines
 URxvt.saveLines: 12000
 
 ! do not scroll with output
@@ -77,22 +87,30 @@ URxvt*scrollWithBuffer: true
 ! scroll back to the bottom on keypress
 URxvt*scrollTtyKeypress: true
 
-! The icon on the taskbar
-URxvt.iconFile: /usr/share/icons/Faenza/apps/scalable/xterm_32x32.svg
+! All PERL extensions
+URxvt.perl-ext-common: default,matcher,tabbedex,fullscreen
 
-!! TABS
-! Shortcuts:
-! Shift ↓   new tab
-! Shift ←   go to left tab
-! Shift →   go to right tab
-! Ctrl  ←   move tab to the left
-! Ctrl  →   move tab to the right
-! Ctrl  D   close tab
+! Clickable URLS on `luakit` with custom color
+URxvt.url-launcher:   /usr/bin/luakit
+URxvt.matcher.button: 1
+URxvt.colorUL:        #4682B4
 
-! Tabs colors
-URxvt.tabbed.tabbar-fg: 2
-URxvt.tabbed.tabbar-bg: 0
-URxvt.tabbed.tab-fg:    3
-URxvt.tabbed.tab-bg:    0
+! Opening links from the keyboard
+URxvt.keysym.C-Delete:  perl:matcher:last
+URxvt.keysym.M-Delete:  perl:matcher:list
 
+!! Advanced Tabs management, tabbedex extension
+
+! Autohiding tabbar if only one tab is present
+URxvt.tabbed.autohide: true
+
+! Disabling default keybindings
+URxvt.tabbed.no-tabbedex-keys: true
+
+URxvt.keysym.C-M-q: perl:tabbedex:new_tab
+URxvt.keysym.C-M-n: perl:tabbedex:next_tab
+URxvt.keysym.C-M-p: perl:tabbedex:prev_tab
+
+! Keybinding for the fullscreen extension
+URxvt.keysym.C-M-f: perl:fullscreen:switch
 
