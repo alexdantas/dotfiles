@@ -27,7 +27,5 @@ $if mode=emacs
 "\C-x\C-m": "make\n"        # Bind C-x C-m to `make`
 "\C-x\C-r": "make run\n"    # Bind C-x C-m to `make run`
 
-# Another command I use a lot
-"\C-x\C-a": "sudo apt-get update && sudo apt-get upgrade\n" 
-
 $endif
+

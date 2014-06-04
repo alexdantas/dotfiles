@@ -131,29 +131,11 @@ function winrar () {
 # Get internal ip address
 alias iip='ip a'
 
-# Copies file with progress bar
-function cp_progress_bar()
-{
-	strace -q -ewrite cp -- "${1}" "${2}" 2>&1 \
-		| awk '{
-			count += $NF
-				if (count % 10 == 0) {
-					percent = count / total_size * 100
-					printf "%3d%% [", percent
-					for (i=0; i<=percent; i++)
-						printf "="
-					printf ">"
-					for (i=percent; i < 100; i++)
-						printf " "
-					printf "]\r"
-				}
-		   }
-		   END { print "" }' total_size=$(stat -c '%s' "${1}") count=0
-}
-
 # Advanced copy and move
-#alias cp='acp --progress-bar'
-#alias mv='amv --progress-bar'
+# Nicely way to print how many files are there left to
+# copy, their sizes and stuff
+alias cp='acp -g'
+alias mv='amv -g'
 
 # This was an attempt to make the prompt color change if the current
 # directory is empty.
@@ -223,9 +205,6 @@ alias tplayer="mplayer -vo caca"
 
 # Tired of typing this over and over
 alias wi='wicd-curses'
-
-# Avoid re-reading this file unless explicitly asked (by the alias 'resource')
-fi
 
 # To make rtorrent work with colors, I gotta reference the local install with
 # a different term.
@@ -383,3 +362,72 @@ alias cal="cal -3"
 
 # Why does fbreader goes against every other program on earth
 alias fbreader=FBReader
+
+# `cdu` is a nice ncurses interface to the `du` utility
+# (shows the size of a directory)
+# This shows colors according to size with human-readable sizes
+alias cdu="cdu -i -dh"
+
+# Beautiful question-answering program installed with `pip --user`
+alias howdoi="howdoi -c"
+
+
+# Copies a series of files to my remote server over SSH
+#
+# Supports multiple origin files, as long as the remote path
+# is the last argument.
+#
+function alexdantas-net-put() {
+	if [[ -z "$1" ]]
+	then
+		echo 'Usage:'
+		echo '    alexdantas-net-put (local file) (remote path)'
+		echo ''
+		echo 'Example:'
+		echo '    alexdantas-net-put file.zip tmp'
+		return 666
+	fi
+
+	# If has only one file, it'll send to `public_html`
+	if [[ -z "$2" ]]
+	then
+		local port=2222
+		local user='alexd075'
+		local host='alexdantas.net'
+
+		echo Doing scp -P "$port" "$@" "$user@$host:public_html/"
+		scp -P "$port" "$@" "$user@$host:public_html/"
+		return 0
+	fi
+
+	# Will separate the last element of the array
+	# from the rest
+	#
+	# Thanks: http://www.cyberciti.biz/faq/linux-unix-appleosx-bash-script-extract-parameters-before-last-args/
+	local array=( $@ )
+	local length=${#array[@]}
+
+	local last=${array[$length-1]}
+	local all_but_last=${array[@]:0:$length-1}
+
+	local port=2222
+	local user='alexd075'
+	local host='alexdantas.net'
+
+	echo Doing scp -P "$port" "$all_but_last" "$user@$host:public_html/$last"
+	scp -P "$port" "$all_but_last" "$user@$host:public_html/$last"
+}
+
+
+# Can't stop laughing
+# http://www.reddit.com/r/archlinux/comments/26is44/alias_yoloyaourt_syyuua_devel_noconfirm/
+function yolo-commit() {
+    git commit -am "$(fortune)"
+}
+
+# Path to the dictionaries directory
+export DICT=/usr/share/dict
+
+# Avoid re-reading this file unless explicitly asked (by the alias 'resource')
+fi
+

@@ -8,9 +8,9 @@
 ! `Emacs` (graphical)
 ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! !
 
-Emacs.default.attributeFont:  -*-*-medium-r-*-*-*-120-*-*-m-*-*-*
-Emacs*menubar*font:           fixed
-Emacs.modeline.attributeFont: fixed
+!Emacs.default.attributeFont:  -*-*-medium-r-*-*-*-120-*-*-m-*-*-*
+!Emacs*menubar*font:           fixed
+!Emacs.modeline.attributeFont: fixed
 
 ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! !
 ! urxvt
@@ -18,35 +18,89 @@ Emacs.modeline.attributeFont: fixed
 ! Settings for this awesome terminal emulator
 ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! !
 
-!! Color scheme
-!! Mix of several found over the time
-URxvt*background: #000020
+!! Dark Solarized Color scheme
+URxvt*background: #002B36
 URxvt*foreground: #E4E4E4
-
 ! black
 URxvt.color0  : #000000
 URxvt.color8  : #555555
 ! red
-URxvt.color1  : #d70000
+URxvt.color1  : #dc322f
 URxvt.color9  : #d75555
 ! green
-URxvt.color2  : #5f8700
+URxvt.color2  : #859900
 URxvt.color10 : #00d700
 ! yellow
-URxvt.color3  : #af8700
+URxvt.color3  : #b58900
 URxvt.color11 : #d7d700
 ! blue
-URxvt.color4  : #0087ff
+URxvt.color4  : #268bd2
 URxvt.color12 : #3305FA
 ! magenta
-URxvt.color5  : #af005f
+URxvt.color5  : #d33682
 URxvt.color13 : #D700FF
 ! cyan
-URxvt.color6  : #00afaf
+URxvt.color6  : #2aa198
 URxvt.color14 : #00AFFF
 ! white
 URxvt.color7  : #AAAAAA
 URxvt.color15 : #FFFFFF
+
+! !! Original Dark Color scheme
+! URxvt*background: #002B36
+! URxvt*foreground: #E4E4E4
+! ! black
+! URxvt.color0  : #000000
+! URxvt.color8  : #555555
+! ! red
+! URxvt.color1  : #d70000
+! URxvt.color9  : #d75555
+! ! green
+! URxvt.color2  : #5f8700
+! URxvt.color10 : #00d700
+! ! yellow
+! URxvt.color3  : #af8700
+! URxvt.color11 : #d7d700
+! ! blue
+! URxvt.color4  : #0087ff
+! URxvt.color12 : #3305FA
+! ! magenta
+! URxvt.color5  : #af005f
+! URxvt.color13 : #D700FF
+! ! cyan
+! URxvt.color6  : #00afaf
+! URxvt.color14 : #00AFFF
+! ! white
+! URxvt.color7  : #AAAAAA
+! URxvt.color15 : #FFFFFF
+
+! !! Light Color scheme
+! URxvt*background: #AFB8BF
+! URxvt*foreground: #000000
+! ! black
+! URxvt.color0  : #000000
+! URxvt.color8  : #555555
+! ! red
+! URxvt.color1  : #CD6A83
+! URxvt.color9  : #E7325F
+! ! green
+! URxvt.color2  : #83CD6A
+! URxvt.color10 : #5FE732
+! ! yellow
+! URxvt.color3  : #B4CD6A
+! URxvt.color11 : #BAE732
+! ! blue
+! URxvt.color4  : #6A83CD
+! URxvt.color12 : #325FE7
+! ! magenta
+! URxvt.color5  : #CD6AB4
+! URxvt.color13 : #E732BA
+! ! cyan
+! URxvt.color6  : #6AB4CD
+! URxvt.color14 : #32BAE7
+! ! white
+! URxvt.color7  : #AAAAAA
+! URxvt.color15 : #FFFFFF
 
 !! Colors of the tab bar
 URxvt.tabbed.tabbar-fg: 7
@@ -62,7 +116,9 @@ URxvt*.transparent: false
 
 ! The default font
 !URxvt*font: xft:Monospace:pixelsize=10:antialias=true
-URxvt*font: xft:Bitstream Vera Sans Mono:pixelsize=11:antialias=true
+!URxvt*font: xft:Bitstream Vera Sans Mono:pixelsize=11:antialias=true
+! URxvt*font: xft:Ubuntu Mono:pixelsize=13:antialias=true
+URxvt*font: xft:Ubuntu Mono:pixelsize=13:spacing=100:scalable=true:antialias=true
 
 ! Dont use a bold font
 URxvt*boldFont: xft:Monospace:bold:pixelsize=11:antialias=true
@@ -107,7 +163,8 @@ URxvt.tabbed.autohide: true
 ! Disabling default keybindings
 URxvt.tabbed.no-tabbedex-keys: true
 
-URxvt.keysym.C-M-q: perl:tabbedex:new_tab
+! Tab navigation
+URxvt.keysym.C-M-a: perl:tabbedex:new_tab
 URxvt.keysym.C-M-n: perl:tabbedex:next_tab
 URxvt.keysym.C-M-p: perl:tabbedex:prev_tab
 

@@ -1,15 +1,17 @@
+# The first file read by X when initializing
 
 # Reading default variables for X apps
 xrdb -merge ~/.Xdefaults
 
-# Disabling Caps Lock
-setxkbmap -option ctrl:nocaps 2>/dev/null
+# For more keyboard stuff, check `~/.xmodmap`
 
-# Making Caps Lock act as a Super Key (Windows logo key)
-# If you wanna use extra keys, see `.xmodmap`.
+# Resets all previous `setxkbmap` settings
 setxkbmap -option
+
+# Make Caps Lock act as a Super Key (Windows logo key)
 setxkbmap -option caps:super
 
 # Which Window Manager will I use when `startx`?
 #exec awesome
 #exec subtle
+
