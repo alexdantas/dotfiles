@@ -253,14 +253,6 @@ alias use-rvm='source ~/.bash_profile'
 # Force commandline emacs
 alias emacs='emacs -nw'
 
-# Debian packager
-alias debuildsa='dpkg-buildpackage -sa -kB63CF56F'
-alias uscan='uscan --verbose --report'
-
-# to make acoc work, i need to redirect stderr to stdout
-alias debuild='acoc debuild --lintian-opts -I --pedantic 2>&1'
-alias lintian='acoc lintian'
-
 alias mydate='date "+%d-%m-%y"'
 
 # Gets current Linux Distribution name
@@ -274,13 +266,24 @@ export DISTRO
 
 case $DISTRO in
 	"Arch")
-		echo "Arch Linux, dude!"
+		# Yaourt falls back to Pacman, so no need
+		# to distinguish them both.
+		#
+		# Also, won't reinstall packages
+		alias pacman='yaourt --needed'
+
+		# Updating EVERYTHING with no confirmation
+		alias pacman-update="sudo yaourt -Syyu --devel --aur --noconfirm"
 		;;
+
 	"Debian")
-		echo "Debian, mate!"
+		# Debian packager stuff
+		alias debuild='debuild --lintian-opts -I --pedantic 2>&1'
+		alias uscan='uscan --verbose --report'
 		;;
+
 	*)
-		echo "Don't know!"
+		# Don't know which distro we are!
 		;;
 esac
 
@@ -296,13 +299,6 @@ function hand() {
 }
 
 alias makewin='make -f Makefile.windows'
-
-# Arch linux!
-# Won't reinstall packages
-alias pacman='yaourt --needed'
-
-# Updating EVERYTHING
-alias pacman-update="sudo yaourt -Syyu --devel --aur --noconfirm"
 
 # Arch packager helper
 # Erases everything temporary under the current directory
