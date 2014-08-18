@@ -199,7 +199,7 @@ export PROMPT_COMMAND=postexec
 #       Otherwise it leaves the shell hanging for a long
 #       time, trying to add it's internal commands on the
 #       history.
-source $HOME/.bash/history.sh
+source $HOME/.bash_helpers/history.sh
 
 # Are we on a X session?
 #if [ -e "$XAUTHORITY" ]
