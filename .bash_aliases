@@ -212,25 +212,33 @@ alias wi='wicd-curses'
 alias rtorrent='TERM="xterm-256color" rtorrent'
 
 # `acoc` is an awesome utility to print colored output
-alias mount="acoc mount"
-alias ping="acoc ping"
-alias free="acoc free -m"
-alias ps="acoc ps"
-alias apt-get="acoc apt-get"
-alias id="acoc id"
-alias make="acoc make"
-alias gcc="acoc gcc"
-alias ldd="acoc ldd"
-alias tcpdump="acoc tcpdump"
-alias netstat="acoc netstat"
-alias whereis="acoc whereis"
-alias w="acoc w"
-alias nmap="acoc nmap"
-alias g++="acoc g++"
-alias df="acoc df -h"			   # alias df="df -h"
-alias apt-cache="acoc apt-cache"
-alias diff='acoc diff'
-alias sdcv='acoc sdcv' # great dict
+#
+# It is normally installed as a Ruby Gem and you can
+# check it's configuration file on `~/.acoc.conf`
+#
+# Only doing aliases if the command exist.
+if hash acoc 2>/dev/null
+then
+	alias mount="acoc mount"
+	alias ping="acoc ping"
+	alias free="acoc free -m"
+	alias ps="acoc ps"
+	alias apt-get="acoc apt-get"
+	alias id="acoc id"
+	alias make="acoc make"
+	alias gcc="acoc gcc"
+	alias ldd="acoc ldd"
+	alias tcpdump="acoc tcpdump"
+	alias netstat="acoc netstat"
+	alias whereis="acoc whereis"
+	alias w="acoc w"
+	alias nmap="acoc nmap"
+	alias g++="acoc g++"
+	alias df="acoc df -h"			   # alias df="df -h"
+	alias apt-cache="acoc apt-cache"
+	alias diff='acoc diff'
+	alias sdcv='acoc sdcv' # great dict
+fi
 
 # Starting the GNOME document viewer without spilling output everywhere
 alias evince='evince &>/dev/null'
