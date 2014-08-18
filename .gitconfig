@@ -1,0 +1,69 @@
+# kure's awesome custom git configuration
+
+[user]
+	name   = "Alexandre Dantas"
+	email  = "eu@alexdantas.net"
+	editor = "emacs -nw"
+
+[color]
+	pager = true
+	ui    = auto
+
+[color "branch"]
+       current = yellow reverse
+       local   = yellow
+       remote  = green
+
+[color "diff"]
+       meta = yellow bold
+       frag = magenta bold
+       old  = red bold
+       new  = green bold
+
+[color "status"]
+       added     = yellow
+       changed   = green
+       untracked = cyan
+
+[alias]
+	# Git log pretty printer (`git l`)
+	# Thanks, 'www.jukie.net/~bart/conf/gitconfig'!
+	l  = log --graph \
+    --pretty=format:'%Cred%h%Creset %Cgreen(%cr)%Creset\n%C(yellow)%d%Creset %s\n' \
+    --abbrev-commit --date=relative --date-order
+
+	log = log --decorate
+
+	# I can't stand typing 'status' all the time!
+	# Also, love the short mode
+	s = status -s
+
+	# Show files ignored by git (`git ign`)
+	ign = ls-files -o -i --exclude-standard
+
+	# Fast pushing to github (`git hub`)
+	hub = push github master
+
+	# Fast pushing to origin (`git ori`)
+	ori = push origin master
+
+	# Always show words on diff (instead of lines)
+	d = diff --color-words
+
+	# `git remote` is useless without `-v`!
+	r = remote -v
+
+# To add github repositories `git remote add github github:project-name`
+[url "https://github.com/alexdantas/"]
+	insteadOf = github:
+
+[core]
+	whitespace=fix,-indent-with-non-tab,trailing-space
+
+[push]
+	default = matching
+
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master
+
