@@ -57,12 +57,10 @@ alias rmsfortune='fortune | cowsay -f rms -W 80'
 
 # `less` with syntax-highlighted output.
 # Depends on the package `source-highlight`
-export LESSOPEN='| /usr/bin/src-hilite-lesspipe.sh %s'
+#
+# Check `.bash_helpers/*` for specific distro
+# commands for `LESSOPEN`
 export LESS='-R -x4'
-
-# This works on Ubuntu/Debian
-# Previous works on Arch
-#export LESSOPEN='| /usr/share/source-highlight/src-hilite-lesspipe.sh %s'
 
 # Pretty output for the Network Manager's commandline interface
 alias nmcli='nmcli -p --nocheck'
@@ -266,20 +264,11 @@ export DISTRO
 
 case $DISTRO in
 	"Arch")
-		# Yaourt falls back to Pacman, so no need
-		# to distinguish them both.
-		#
-		# Also, won't reinstall packages
-		alias pacman='yaourt --needed'
-
-		# Updating EVERYTHING with no confirmation
-		alias pacman-update="sudo yaourt -Syyu --devel --aur --noconfirm"
+		source ~/.bash_helpers/arch-linux.sh
 		;;
 
 	"Debian")
-		# Debian packager stuff
-		alias debuild='debuild --lintian-opts -I --pedantic 2>&1'
-		alias uscan='uscan --verbose --report'
+		source ~/.bash_helpers/debian.sh
 		;;
 
 	*)
@@ -299,26 +288,6 @@ function hand() {
 }
 
 alias makewin='make -f Makefile.windows'
-
-# Arch packager helper
-# Erases everything temporary under the current directory
-# (stuff generated with `makepkg`, `mkaurball` and `updpkgsums`)
-#
-# Note: It takes care to only delete things if there's a
-#       `PKGBUILD` on the current directory.
-function pkgbuild-clean() {
-	name=`basename $PWD`
-
-	if [ ! -f "PKGBUILD" ]
-	then
-		echo "Error: No 'PKGBUILD' on the current directory"
-		echo "       Won't delete anything"
-		return -1
-	fi
-
-	rm -fv  ./*.tar.gz ./*.tar.xz
-	rm -rfv ./pkg ./src
-}
 
 # This makes screenfetching a lot easier
 # (placing them with custom name on '~/screenshots'

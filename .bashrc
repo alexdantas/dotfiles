@@ -40,11 +40,6 @@ shopt -s extglob
 # (now Ctrl+s does forward incremental search on history)
 stty -ixon
 
-# If you're into a `chroot`
-if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
-fi
-
 # Allows fancy colored prompts according to terminal.
 # Also, `mrxvt` can't display unicode, fallback to something else
 case "$TERM" in
@@ -175,15 +170,6 @@ export LYNX_LSS=~/.lynx/lynx.lss
 # Key shortcuts for the shell,
 # check them out!
 export INPUTRC=$HOME/.inputrc
-
-# Debian Packager-related stuff
-# Ignore it if you're not on it.
-export GPG_PUB="B63CF56F"
-export DEBFULLNAME="Alexandre Dantas"
-export DEBEMAIL=alex.dantas92@gmail.com
-export QUILT_PATCHES=debian/patches
-export QUILT_DIFF_ARGS="--no-timestamps --no-index -pab"
-export QUILT_REFRESH_ARGS="--no-timestamps --no-index -pab"
 
 # For `bundle` gem to work correctly, installing gems on $HOME.
 #export GEM_HOME=~/.gem/ruby/2.0.0
