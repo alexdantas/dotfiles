@@ -129,12 +129,6 @@ function winrar () {
 # Get internal ip address
 alias iip='ip a'
 
-# Advanced copy and move
-# Nicely way to print how many files are there left to
-# copy, their sizes and stuff
-alias cp='acp -g'
-alias mv='amv -g'
-
 # This was an attempt to make the prompt color change if the current
 # directory is empty.
 # It worked, but has two major flaws (because it wraps-up the 'cd' command)

@@ -40,3 +40,10 @@ function pkgbuild-clean() {
 export LESSOPEN='| /usr/bin/src-hilite-lesspipe.sh %s'
 
 
+# Advanced copy and move
+# Nicely way to print how many files are there left to
+# copy, their sizes and stuff
+alias cp='acp -g'
+alias mv='amv -g'
+
+
