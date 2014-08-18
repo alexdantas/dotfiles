@@ -50,7 +50,7 @@ fi
 case "$TERM" in
 	xterm-color)    color_prompt=yes;;
 	xterm-256color) color_prompt=yes;;
-	rxvt)           export LANG=en_US.iso-8859-1;; # export LC_CTYPE=en_US.iso-8859-1;; 
+	rxvt)           export LANG=en_US.iso-8859-1;; # export LC_CTYPE=en_US.iso-8859-1;;
 esac
 
 # This pretty much cancels the thing right above, right?
@@ -225,6 +225,13 @@ source $HOME/.bash/history.sh
 #fi
 
 export HAXE_STD_PATH='/opt/haxe/std:.'
+
+
+# Nintendo DS Development!
+# Source the development files for the `devkitpro` libs
+if [ -f /etc/profile.d/devkitarm.sh ]; then
+    source /etc/profile.d/devkitarm.sh
+fi
 
 
 # Avoid re-reading this file unless explicitly asked

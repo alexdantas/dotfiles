@@ -272,6 +272,29 @@ alias makewin='make -f Makefile.windows'
 # Won't reinstall packages
 alias pacman='yaourt --needed'
 
+# Updating EVERYTHING
+alias pacman-update="sudo yaourt -Syyu --devel --aur --noconfirm"
+
+# Arch packager helper
+# Erases everything temporary under the current directory
+# (stuff generated with `makepkg`, `mkaurball` and `updpkgsums`)
+#
+# Note: It takes care to only delete things if there's a
+#       `PKGBUILD` on the current directory.
+function pkgbuild-clean() {
+	name=`basename $PWD`
+
+	if [ ! -f "PKGBUILD" ]
+	then
+		echo "Error: No 'PKGBUILD' on the current directory"
+		echo "       Won't delete anything"
+		return -1
+	fi
+
+	rm -fv  ./*.tar.gz ./*.tar.xz
+	rm -rfv ./pkg ./src
+}
+
 # This makes screenfetching a lot easier
 # (placing them with custom name on '~/screenshots'
 alias scrot='scrot "screen-%F-%T.png" -e "mv $f ~/screenshots/ 2>/dev/null"'
@@ -351,8 +374,11 @@ function lock() {
 	xscreensaver-command -lock
 }
 
+# Show the extracted files while extracting
+alias tar='tar -v'
+
 # Colored and pretty tree
-alias tree='tree -C -A'
+alias tree='tree -C'
 
 # Simple date formatter in Ruby
 alias rdate="ruby -r 'date' -e 'puts Date.today.strftime %q{%b %d, %Y}'"
@@ -427,6 +453,21 @@ function yolo-commit() {
 
 # Path to the dictionaries directory
 export DICT=/usr/share/dict
+
+# Initialize everything necessary for Virtualbox to work
+function virtualbox-init() {
+
+    sudo dkms install vboxhost/4.3.14
+
+    sudo systemctl start vboxservice
+
+    # Starts thihgs for virtualbox
+    sudo modprobe -a vboxvideo vboxdrv vboxnetadp vboxnetflt
+
+    # Shared directory
+    mkdir -p /tmp/virtualbox
+    sudo mount -t vboxsf /tmp/virtualbox/ /virtualbox
+}
 
 # Avoid re-reading this file unless explicitly asked (by the alias 'resource')
 fi
