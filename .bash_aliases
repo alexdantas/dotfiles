@@ -263,6 +263,27 @@ alias lintian='acoc lintian'
 
 alias mydate='date "+%d-%m-%y"'
 
+# Gets current Linux Distribution name
+#
+# (note: not available everywhere.
+#        Debian/Ubuntu has `lsb_release` it, but Fedora don't)
+#
+# Source: http://unix.stackexchange.com/a/6348
+DISTRO=$(lsb_release -si)
+export DISTRO
+
+case $DISTRO in
+	"Arch")
+		echo "Arch Linux, dude!"
+		;;
+	"Debian")
+		echo "Debian, mate!"
+		;;
+	*)
+		echo "Don't know!"
+		;;
+esac
+
 # My hand's starting to hurt ):
 # Need this to remind myself of the exercises
 function hand() {
