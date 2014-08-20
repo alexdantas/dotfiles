@@ -366,7 +366,7 @@ function lock() {
 alias tar='tar -v'
 
 # Colored and pretty tree
-alias tree='tree -C'
+alias tree='tree -C -A'
 
 # Simple date formatter in Ruby
 alias rdate="ruby -r 'date' -e 'puts Date.today.strftime %q{%b %d, %Y}'"
