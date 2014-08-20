@@ -1,13 +1,6 @@
 
-# Dont track files that have extensions
-/*.*
+# Ignore EVERYTHING
+*
 
-# Except when they're 'dot files'
-!/.*
-
-# Damn you auto-save-list!
-.emacs.d/auto-save-list/
-
-# Misc stuff
-.elinks
-
+# From now on, to add a file I'll have to
+# do a `--force`
