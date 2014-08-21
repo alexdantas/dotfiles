@@ -385,6 +385,11 @@ alias cdu="cdu -i -dh"
 # Beautiful question-answering program installed with `pip --user`
 alias howdoi="howdoi -c"
 
+# Cache SSH password for this session
+function ssh-cache() {
+	eval $(ssh-agent)
+	ssh-add
+}
 
 # Copies a series of files to my remote server over SSH
 #
