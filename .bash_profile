@@ -24,3 +24,6 @@ fi
 #cpufreq-selector -g powersave
 # check with cpufreq-info
 
+# Disabling the awful awful beeping on my
+# new Toshiba laptop
+setterm -blength 0

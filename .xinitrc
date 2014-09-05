@@ -3,6 +3,11 @@
 # xinitrc: The first file read by X when initializing
 # Executed by `startx` and `xinit`
 
+# Most importantly, disable the awful PC beep
+# Ever since I bought this new Toshiba laptop it
+# keeps beeping a very irritating noise
+xset -b
+
 # Reading default variables for X apps
 xrdb -merge ~/.Xdefaults
 
