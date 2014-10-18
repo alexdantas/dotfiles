@@ -41,14 +41,21 @@ export LESSOPEN='| /usr/bin/src-hilite-lesspipe.sh %s'
 
 
 # Advanced copy and move
-# Nicely way to print how many files are there left to
-# copy, their sizes and stuff
+# 
+# Shows progress bar when copying with "cp" and "mv"
 #
-# But only if you install the package "advcp"
+# My netbook has "amv" but my laptop has "vcp"...
+# Anyway you should install the package "advcopy"
+#
 if command -v amv > /dev/null
 then
 	alias cp='acp -g'
 	alias mv='amv -g'
+fi
+if command -v vcp > /dev/null
+then
+	alias cp='vcp -g'
+	alias mv='vmv -g'
 fi
 
 
