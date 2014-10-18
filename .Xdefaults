@@ -2,6 +2,11 @@
 !! My Xresources file!
 !!
 !! These are default settings for a lot of applications
+!!
+!! To reread this file, use
+!!
+!!    $ xrdb -merge ~/.Xdefaults
+!!
 !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !!
 
 ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! ! !
@@ -117,11 +122,13 @@ URxvt*.transparent: false
 ! The default font
 !URxvt*font: xft:Monospace:pixelsize=10:antialias=true
 !URxvt*font: xft:Bitstream Vera Sans Mono:pixelsize=11:antialias=true
-! URxvt*font: xft:Ubuntu Mono:pixelsize=13:antialias=true
-URxvt*font: xft:Ubuntu Mono:pixelsize=13:spacing=100:scalable=true:antialias=true
+!URxvt*font: xft:Ubuntu Mono:pixelsize=13:antialias=true
+!URxvt*font: xft:Ubuntu Mono:pixelsize=13:spacing=100:scalable=true:antialias=true
+URxvt*font: xft:Inconsolata:pixelsize=16:spacing=100:scalable=true:antialias=true
 
 ! Dont use a bold font
-URxvt*boldFont: xft:Monospace:bold:pixelsize=11:antialias=true
+! (same as regular font)
+URxvt*boldFont: xft:Inconsolata:pixelsize=16:spacing=100:scalable=true:antialias=true
 
 ! The icon on the taskbar
 URxvt.iconFile: /usr/share/icons/Faenza/apps/scalable/xterm_32x32.svg
